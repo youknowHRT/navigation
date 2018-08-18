@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <main>
+        <div id="biubiubiu">
+
+        </div>
+    </main>
+    <script>
+        var keys = [['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+        ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+        ['z', 'x', 'c', 'v', 'b', 'n', 'm']]
+        var hash = {
+            q: 'qq.com',
+            w: 'music.163.com',
+            e: 'ele.me',
+            r: 'www.yyets.com',
+            t: 'www.taobao.com',
+            y: 'www.amazon.cn',
+            u: 'dota2.uuu9.com',
+            i: 'www.ikea.com/cn',
+            o: 'www.dytt8.net',
+            p: 'www.panda.tv',
+            a: 'www.iqiyi.com',
+            s: 'store.steampowered.com',
+            d: 'www.dota2.com.cn',
+            f: 'fanyi.youdao.com',
+            g: 'google.com',
+            h: 'huaban.com',
+            j: 'home.jd.com',
+            k: 'hwww.kaola.com',
+            l: 'www.lagou.com',
+            z: 'www.zhihu.com',
+            x: '',
+            c: '',
+            v: '',
+            b: 'www.bilibili.com',
+            n: 'nba.qq.com',
+            m: '',
+        }
+        var hashInlocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
+        if (hashInlocalStorage) {
+            hash = hashInlocalStorage;
+        }
+        index = 0;
+        for (var index = 0; index < keys.length; index++) {
+            longBox = document.createElement('div');
+            biubiubiu.appendChild(longBox);
+            row = keys[index];
+            index2 = 0;
+            for (var index2 = 0; index2 < row.length; index2++) {
+                kbdBox = document.createElement('kbd');
+                spanX = document.createElement('span')
+                spanX.textContent = row[index2];
+
+                imgX=document.createElement('img');
+                if(hash[row[index2]]){
+                    imgX.src='http://'+hash[row[index2]]+'/favicon.ico';
+                }else{
+                    imgX.src='https://i.loli.net/2018/08/17/5b76e4066a930.png'
+                }
+                imgX.onerror=function(xxx){
+                    xxx.target.src='https://i.loli.net/2018/08/17/5b76e4066a930.png';
+                }
+                document.onkeypress = function (skr) {
+                    key = skr['key'];
+                    website = hash[key];
+                    window.open('http://' + website, '_blank');
+                }
+                buttonX = document.createElement('button');
+                buttonX.textContent = 'editor';
+                buttonX.id = row[index2];
+                buttonX.onclick = function (skr) {
+                    key = skr['target']['id'];
+                    diyWeb = prompt('请输入网址');
+                    hash[key] = diyWeb;
+                    localStorage.setItem('zzz', JSON.stringify(hash))
+                }
+                kbdBox.appendChild(spanX);
+                kbdBox.appendChild(imgX);
+                kbdBox.appendChild(buttonX);
+                longBox.appendChild(kbdBox);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
